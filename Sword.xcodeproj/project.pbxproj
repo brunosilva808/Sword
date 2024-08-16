@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E2FF1782C6F56E200443EF3 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2FF1772C6F56E200443EF3 /* APIManager.swift */; };
+		7E2FF17B2C6F572B00443EF3 /* EndpointEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2FF17A2C6F572B00443EF3 /* EndpointEnum.swift */; };
 		7E971B382C6F547A00AF458A /* SwordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E971B372C6F547A00AF458A /* SwordApp.swift */; };
 		7E971B3A2C6F547A00AF458A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E971B392C6F547A00AF458A /* ContentView.swift */; };
 		7E971B3C2C6F547B00AF458A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E971B3B2C6F547B00AF458A /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E2FF1772C6F56E200443EF3 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		7E2FF17A2C6F572B00443EF3 /* EndpointEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointEnum.swift; sourceTree = "<group>"; };
 		7E971B342C6F547A00AF458A /* Sword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E971B372C6F547A00AF458A /* SwordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordApp.swift; sourceTree = "<group>"; };
 		7E971B392C6F547A00AF458A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E2FF1792C6F56E700443EF3 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7E2FF1772C6F56E200443EF3 /* APIManager.swift */,
+				7E2FF17A2C6F572B00443EF3 /* EndpointEnum.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		7E971B2B2C6F547A00AF458A = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +109,7 @@
 			children = (
 				7E971B372C6F547A00AF458A /* SwordApp.swift */,
 				7E971B392C6F547A00AF458A /* ContentView.swift */,
+				7E2FF1792C6F56E700443EF3 /* Managers */,
 				7E971B3B2C6F547B00AF458A /* Assets.xcassets */,
 				7E971B3D2C6F547B00AF458A /* Preview Content */,
 			);
@@ -257,8 +271,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E2FF1782C6F56E200443EF3 /* APIManager.swift in Sources */,
 				7E971B3A2C6F547A00AF458A /* ContentView.swift in Sources */,
 				7E971B382C6F547A00AF458A /* SwordApp.swift in Sources */,
+				7E2FF17B2C6F572B00443EF3 /* EndpointEnum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
