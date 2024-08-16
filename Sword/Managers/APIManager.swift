@@ -7,7 +7,6 @@
 
 import Foundation
 
-// private var apiKey: String { return "live_B9KDr9FSstkoz46NLyxZ1FoFhHKhUsXUxFTBZR2ZiO3lbZpoRjFxz6WEOLBERjLG" }
 
 protocol APIManagerProtocol {
     func downloadAsyncAwait<T: Codable>(_ endpointEnum: EndpointEnum, type: T.Type) async throws -> T?
@@ -20,6 +19,8 @@ enum APIManagerError: Error {
 
 final class APIManager: APIManagerProtocol {
     
+    private var apiKey = "live_B9KDr9FSstkoz46NLyxZ1FoFhHKhUsXUxFTBZR2ZiO3lbZpoRjFxz6WEOLBERjLG"
+
     private let session: URLSession
     private let decoder = JSONDecoder()
 
@@ -28,12 +29,13 @@ final class APIManager: APIManagerProtocol {
     }
     
     func downloadAsyncAwait<T: Codable>(_ endpointEnum: EndpointEnum, type: T.Type) async throws -> T? {
+        let request = NSMutableURLRequest(url: endpointEnum.url)
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.httpMethod = "GET"
         
-        let url = endpointEnum.url
-        
-        let request = URLRequest(url: url)
         do {
-            let (data, response) = try await session.data(for: request, delegate: nil)
+            let (data, response) = try await session.data(for: request as URLRequest,
+                                                          delegate: nil)
             guard let response = response as? HTTPURLResponse,
                   response.statusCode >= 200 && response.statusCode < 300 else {
 
