@@ -33,18 +33,26 @@ final class APIManager: APIManagerProtocol {
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
         request.httpMethod = "GET"
         
+        print("*** API Call started ***")
+        print("Request: \(request)")
+        print("Headers: \(request.allHTTPHeaderFields)")
+        
         do {
             let (data, response) = try await session.data(for: request as URLRequest,
                                                           delegate: nil)
             guard let response = response as? HTTPURLResponse,
                   response.statusCode >= 200 && response.statusCode < 300 else {
 
+                print("*** APIManagerError.httpStatus ***")
                 throw APIManagerError.httpStatus
             }
             
             let result = try decoder.decode(type, from: data)
+            print("API Call ended")
+            print("Result: \(result)")
             return result
         } catch  {
+            print("*** APIManagerError.decoding ***")
             throw APIManagerError.decoding
         }
     }

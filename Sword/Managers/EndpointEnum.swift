@@ -14,25 +14,29 @@ enum SizeImagesEnum: String {
 enum EndpointEnum {
     private var baseURL: String { return "https://api.thecatapi.com/v1" }
     
-    case catImage(SizeImagesEnum, Int)
+    case catImage(SizeImagesEnum, Int, Bool, Int)
     
     private var fullPath: String {
         var endpoint: String
         
         switch self {
-        case .catImage(let size, let page):
+        case .catImage(let size, let page, let hasBreeds, let limit):
+            
+            endpoint = "/images/search"
             
             let queryItems = [
                 URLQueryItem(name: "size", value: size.rawValue),
-                URLQueryItem(name: "page", value: "\(page)")]
-            var urlComps = URLComponents(string: baseURL)!
+                URLQueryItem(name: "page", value: "\(page)"),
+                URLQueryItem(name: "has_breeds", value: "\(hasBreeds)"),
+                URLQueryItem(name: "limit", value: "\(limit)")]
+            var urlComps = URLComponents(string: baseURL + endpoint)!
             urlComps.queryItems = queryItems
-            let result = urlComps.url!
             
-            endpoint = "/images/search"
+            let result = urlComps.url!
+            return result.absoluteString
         }
         
-        return baseURL + endpoint
+//        return baseURL + endpoint
     }
     
     var url: URL {

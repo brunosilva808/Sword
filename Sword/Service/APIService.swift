@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ImageAPIServiceProtocol {
-    func fetchImages(_ size: SizeImagesEnum, page: Int) async
+    func fetchImages(_ size: SizeImagesEnum, page: Int, limit: Int) async -> [Cat]
 }
 
 // MARK: - APIService
@@ -17,19 +17,21 @@ final class APIService {
     
     private let apiManager: APIManagerProtocol
     
-    init(apiManager: APIManagerProtocol) {
+    init(apiManager: APIManagerProtocol = APIManager()) {
         self.apiManager = apiManager
     }
 }
 
 extension APIService: ImageAPIServiceProtocol {
     
-    func fetchImages(_ size: SizeImagesEnum, page: Int) async {
+    func fetchImages(_ size: SizeImagesEnum, page: Int, limit: Int) async -> [Cat] {
         do {
-            _ = try await apiManager.downloadAsyncAwait(.catImage(size, page),
-                                                        type: [Cat].self)
+            return try await apiManager.downloadAsyncAwait(.catImage(size, page, true, limit),
+                                                           type: [Cat].self) ?? []
         } catch {
             print(error.localizedDescription)
         }
+        
+        return []
     }
 }
