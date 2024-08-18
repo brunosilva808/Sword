@@ -113,6 +113,7 @@ extension FavouritesDataManager: FavouritesDataManagerProtocol {
         }
             
         for entity in favouritesEntities {
+            print(entity.id)
             if entity.id == id {
                 return true
             }

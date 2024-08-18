@@ -8,7 +8,8 @@
 import SwiftUI
 
 final class FavouriteViewModel: ObservableObject {
-    let favouritesManager: FavouritesDataManagerProtocol
+    private let favouritesManager: FavouritesDataManagerProtocol
+    @Published var isFavourite = false
     
     init(persistenceManager: FavouritesDataManagerProtocol = FavouritesDataManager.shared) {
         self.favouritesManager = persistenceManager
@@ -40,24 +41,33 @@ final class FavouriteViewModel: ObservableObject {
             return false
         }
     }
+    
+    func checkIfItsFavourite(id: String) {
+        print(isFavourite)
+        isFavourite = isFavourite(id: id)
+        print(isFavourite)
+    }
 }
 
 struct FavouriteView: View {
     @StateObject private var viewModel = FavouriteViewModel()
     var cat: Cat
-    @State var isFavourite = false
     
     var body: some View {
         HStack {
             Button(action: {
                 if viewModel.isFavourite(id: cat.id) {
-                    isFavourite = !viewModel.removeFromFavourites(id: cat.id)
+                    viewModel.isFavourite = !viewModel.removeFromFavourites(id: cat.id)
                 } else {
-                    isFavourite = viewModel.saveToFavourites(id: cat.id)
+                    viewModel.isFavourite = viewModel.saveToFavourites(id: cat.id)
                 }
             }) {
-                Image(systemName: self.isFavourite == true ? "star.fill" : "star")
+                Image(systemName: viewModel.isFavourite == true ? "star.fill" : "star")
             }
+        }
+        .onAppear {
+            viewModel.checkIfItsFavourite(id: cat.id)
+            print(cat.breedName)
         }
     }
 }

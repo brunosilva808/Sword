@@ -34,8 +34,6 @@ final class APIManager: APIManagerProtocol {
         request.httpMethod = "GET"
         
         print("*** API Call started ***")
-        print("Request: \(request)")
-        print("Headers: \(request.allHTTPHeaderFields)")
         
         do {
             let (data, response) = try await session.data(for: request as URLRequest,
