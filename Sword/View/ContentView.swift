@@ -18,13 +18,17 @@ final class ViewModel: ObservableObject {
         return catsArray.filter{$0.name.localizedCaseInsensitiveContains(searchTerm)}
     }
     
+    func isLastCat(id: String) -> Bool {
+        return catsArray.last?.id == id ? true : false
+    }
+    
     init(apiService: APIService = APIService()) {
         self.apiService = apiService
     }
     
     @MainActor
     func fetchCats() async {
-        catsArray = await apiService.fetchImages(.thumb, page: page, limit: 25)
+        catsArray.append(contentsOf: await apiService.fetchImages(.thumb, page: page, limit: 25))
         page += 1
     }
 }
@@ -40,9 +44,15 @@ struct ContentView: View {
                 ScrollView{
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(viewModel.filteredCatsArray, id: \.id) { cat in
-                            VStack {
-                                CatView(cat: cat)
-                            }
+                            CatView(cat: cat)
+                                .onAppear {
+                                    if viewModel.isLastCat(id: cat.id) {
+                                        print("LAST CAT")
+                                        Task {
+                                            await viewModel.fetchCats()
+                                        }
+                                    }
+                                }
                         }
                     }
                     .searchable(text: $viewModel.searchTerm, prompt: "Search Breeds")

@@ -7,20 +7,21 @@
 
 import Foundation
 
-protocol PersistenceManagerProtocol {
+protocol FavouritesManagerProtocol {
     func saveFavourite(id: String) throws
     func removeFavourite(id: String) throws
+    func isFavourite(id: String) -> Bool
 }
 
-final class PersistenceManager {
+final class FavouritesManager {
     
     enum PersistenceErrorEnum: Error {
         case writeError
         case readError
     }
     
-    let shared = PersistenceManager()
-    private var favouritesArray = [String]()
+    static let shared = FavouritesManager()
+    private var favouritesSet = Set<String>()
     private var fileURL: URL = {
         let docDir = try! FileManager.default.url(for: .documentDirectory,
                                                   in: .userDomainMask,
@@ -30,15 +31,15 @@ final class PersistenceManager {
     }()
     
     private init() {
-        try? favouritesArray = loadFavourites()
+        try? favouritesSet = loadFavourites()
     }
 }
 
-extension PersistenceManager: PersistenceManagerProtocol {
+extension FavouritesManager: FavouritesManagerProtocol {
     
     func saveFavourite(id: String) throws {
         
-        favouritesArray.append(id)
+        favouritesSet.insert(id)
         
         do {
             try saveFavourites()
@@ -49,8 +50,8 @@ extension PersistenceManager: PersistenceManagerProtocol {
     
     func removeFavourite(id: String) throws {
         do {
-            if let index = favouritesArray.firstIndex(of: id) {
-                favouritesArray.remove(at: index)
+            if let index = favouritesSet.firstIndex(of: id) {
+                favouritesSet.remove(at: index)
                 
                 do {
                     try saveFavourites()
@@ -62,12 +63,16 @@ extension PersistenceManager: PersistenceManagerProtocol {
             throw PersistenceErrorEnum.readError
         }
     }
+    
+    func isFavourite(id: String) -> Bool {
+        return favouritesSet.contains(id)
+    }
 }
 
-extension PersistenceManager {
+extension FavouritesManager {
     
     private func saveFavourites() throws {
-        let data = try PropertyListEncoder().encode(favouritesArray)
+        let data = try PropertyListEncoder().encode(favouritesSet)
         do {
             try data.write(to: self.fileURL, options: [.atomic])
         } catch {
@@ -75,11 +80,11 @@ extension PersistenceManager {
         }
     }
     
-    private func loadFavourites() throws -> [String] {
+    private func loadFavourites() throws -> Set<String> {
         do {
             let data = try Data(contentsOf: self.fileURL)
-            favouritesArray = try PropertyListDecoder().decode(Array<String>.self, from: data)
-            return favouritesArray
+            favouritesSet = try PropertyListDecoder().decode(Set<String>.self, from: data)
+            return favouritesSet
         } catch {
             throw PersistenceErrorEnum.readError
         }

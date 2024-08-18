@@ -28,15 +28,14 @@ enum EndpointEnum {
                 URLQueryItem(name: "size", value: size.rawValue),
                 URLQueryItem(name: "page", value: "\(page)"),
                 URLQueryItem(name: "has_breeds", value: "\(hasBreeds)"),
-                URLQueryItem(name: "limit", value: "\(limit)")]
+                URLQueryItem(name: "limit", value: "\(limit)"),
+                URLQueryItem(name: "order", value: "ASC")]
             var urlComps = URLComponents(string: baseURL + endpoint)!
             urlComps.queryItems = queryItems
             
             let result = urlComps.url!
             return result.absoluteString
         }
-        
-//        return baseURL + endpoint
     }
     
     var url: URL {

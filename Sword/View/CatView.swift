@@ -7,8 +7,31 @@
 
 import SwiftUI
 
+final class CatViewModel: ObservableObject {
+    let favouritesManager: FavouritesManagerProtocol
+    
+    init(persistenceManager: FavouritesManagerProtocol = FavouritesManager.shared) {
+        self.favouritesManager = persistenceManager
+    }
+    
+    func saveToFavourites(id: String) {
+        try? favouritesManager.saveFavourite(id: id)
+    }
+    
+    func removeFromFavourites(id: String) {
+        try? favouritesManager.removeFavourite(id: id)
+    }
+    
+    func isFavourite(id: String) -> Bool {
+        favouritesManager.isFavourite(id: id)
+    }
+}
+
 struct CatView: View {
+    
+    @StateObject private var viewModel = CatViewModel()
     var cat: Cat
+    @State var isFavourite = false
     
     var body: some View {
             VStack {
@@ -28,10 +51,16 @@ struct CatView: View {
                 }
                 HStack {
                     Text(cat.name)
-                    Button {
-                        print("Edit button was tapped")
-                    } label: {
-                        Image(systemName: "pencil")
+                    Button(action: {
+                        if viewModel.isFavourite(id: cat.id) {
+                            isFavourite = false
+                            viewModel.removeFromFavourites(id: cat.id)
+                        } else {
+                            isFavourite = true
+                            viewModel.saveToFavourites(id: cat.id)
+                        }
+                    }) {
+                        Image(systemName: self.isFavourite == true ? "star.fill" : "star")
                     }
                 }
             }

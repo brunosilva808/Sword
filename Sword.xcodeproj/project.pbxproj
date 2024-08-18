@@ -19,7 +19,7 @@
 		7E971B492C6F547C00AF458A /* SwordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E971B482C6F547C00AF458A /* SwordTests.swift */; };
 		7E971B532C6F547C00AF458A /* SwordUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E971B522C6F547C00AF458A /* SwordUITests.swift */; };
 		7E971B552C6F547C00AF458A /* SwordUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E971B542C6F547C00AF458A /* SwordUITestsLaunchTests.swift */; };
-		7EC9F5362C70E5E100DF5D7B /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9F5352C70E5E100DF5D7B /* PersistenceManager.swift */; };
+		7EC9F5362C70E5E100DF5D7B /* FavouritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9F5352C70E5E100DF5D7B /* FavouritesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +55,7 @@
 		7E971B4E2C6F547C00AF458A /* SwordUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwordUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E971B522C6F547C00AF458A /* SwordUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordUITests.swift; sourceTree = "<group>"; };
 		7E971B542C6F547C00AF458A /* SwordUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		7EC9F5352C70E5E100DF5D7B /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		7EC9F5352C70E5E100DF5D7B /* FavouritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				7E2FF1772C6F56E200443EF3 /* APIManager.swift */,
-				7EC9F5352C70E5E100DF5D7B /* PersistenceManager.swift */,
+				7EC9F5352C70E5E100DF5D7B /* FavouritesManager.swift */,
 				7E2FF17A2C6F572B00443EF3 /* EndpointEnum.swift */,
 			);
 			path = Managers;
@@ -310,7 +310,7 @@
 				7E2FF1782C6F56E200443EF3 /* APIManager.swift in Sources */,
 				7E2FF17D2C6F60BE00443EF3 /* APIService.swift in Sources */,
 				7E7BCED22C6FA3C500729C04 /* CatView.swift in Sources */,
-				7EC9F5362C70E5E100DF5D7B /* PersistenceManager.swift in Sources */,
+				7EC9F5362C70E5E100DF5D7B /* FavouritesManager.swift in Sources */,
 				7E2FF17F2C6F622D00443EF3 /* Cat.swift in Sources */,
 				7E971B3A2C6F547A00AF458A /* ContentView.swift in Sources */,
 				7E971B382C6F547A00AF458A /* SwordApp.swift in Sources */,
