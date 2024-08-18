@@ -7,29 +7,8 @@
 
 import SwiftUI
 
-final class CatViewModel: ObservableObject {
-    let favouritesManager: FavouritesManagerProtocol
-    
-    init(persistenceManager: FavouritesManagerProtocol = FavouritesManager()) {
-        self.favouritesManager = persistenceManager
-    }
-    
-    func saveToFavourites(id: String) {
-        try? favouritesManager.saveFavourite(id: id)
-    }
-    
-    func removeFromFavourites(id: String) {
-        try? favouritesManager.removeFavourite(id: id)
-    }
-    
-    func isFavourite(id: String) -> Bool {
-        favouritesManager.isFavourite(id: id)
-    }
-}
-
 struct CatView: View {
     
-    @StateObject private var viewModel = CatViewModel()
     var cat: Cat
     @State var isFavourite = false
     

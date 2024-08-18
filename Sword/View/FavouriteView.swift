@@ -8,22 +8,37 @@
 import SwiftUI
 
 final class FavouriteViewModel: ObservableObject {
-    let favouritesManager: FavouritesManagerProtocol
+    let favouritesManager: FavouritesDataManagerProtocol
     
-    init(persistenceManager: FavouritesManagerProtocol = FavouritesManager()) {
+    init(persistenceManager: FavouritesDataManagerProtocol = FavouritesDataManager.shared) {
         self.favouritesManager = persistenceManager
     }
     
-    func saveToFavourites(id: String) {
-        try? favouritesManager.saveFavourite(id: id)
+    func saveToFavourites(id: String) -> Bool {
+        do {
+            try favouritesManager.saveFavourite(id: id)
+            return true
+        } catch {
+            return false
+        }
     }
     
-    func removeFromFavourites(id: String) {
-        try? favouritesManager.removeFavourite(id: id)
+    func removeFromFavourites(id: String) -> Bool {
+        do {
+        try favouritesManager.removeFavourite(id: id)
+            return true
+        } catch {
+            return false
+        }
     }
     
     func isFavourite(id: String) -> Bool {
-        favouritesManager.isFavourite(id: id)
+        do {
+            let result = try favouritesManager.isFavourite(id: id)
+            return result
+        } catch {
+            return false
+        }
     }
 }
 
@@ -36,11 +51,9 @@ struct FavouriteView: View {
         HStack {
             Button(action: {
                 if viewModel.isFavourite(id: cat.id) {
-                    isFavourite = false
-                    viewModel.removeFromFavourites(id: cat.id)
+                    isFavourite = !viewModel.removeFromFavourites(id: cat.id)
                 } else {
-                    isFavourite = true
-                    viewModel.saveToFavourites(id: cat.id)
+                    isFavourite = viewModel.saveToFavourites(id: cat.id)
                 }
             }) {
                 Image(systemName: self.isFavourite == true ? "star.fill" : "star")

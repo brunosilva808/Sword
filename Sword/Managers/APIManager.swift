@@ -49,10 +49,8 @@ final class APIManager: APIManagerProtocol {
             
             let result = try decoder.decode(type, from: data)
             print("API Call ended")
-            print("Result: \(result)")
             return result
         } catch  {
-            print("*** APIManagerError.decoding ***")
             throw APIManagerError.decoding
         }
     }
