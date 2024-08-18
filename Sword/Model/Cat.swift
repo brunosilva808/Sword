@@ -15,9 +15,33 @@ struct Cat: Codable {
 }
 
 extension Cat {
-    var name: String {
+    var breedName: String {
         if let breed = breeds.first {
             return breed.name
+        } else {
+            return ""
+        }
+    }
+    
+    var temperament: String {
+        if let breed = breeds.first {
+            return breed.temperament
+        } else {
+            return ""
+        }
+    }
+    
+    var origin: String {
+        if let breed = breeds.first {
+            return breed.origin
+        } else {
+            return ""
+        }
+    }
+    
+    var description: String {
+        if let breed = breeds.first {
+            return breed.description
         } else {
             return ""
         }
@@ -29,8 +53,9 @@ struct Breed: Codable {
 //    let weight: Weight
     let id, name: String
 //    let vetstreetURL: String?
-//    let temperament, origin, countryCodes, countryCode: String
-//    let description, lifeSpan: String
+    let temperament, origin, description: String
+//    let countryCodes, countryCode: String
+//    let lifeSpan: String
 //    let indoor: Int
 //    let altNames: AltNames?
 //    let adaptability, affectionLevel, childFriendly, dogFriendly: Int

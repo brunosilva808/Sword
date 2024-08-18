@@ -20,7 +20,6 @@ final class FavouritesManager {
         case readError
     }
     
-    static let shared = FavouritesManager()
     private var favouritesSet = Set<String>()
     private var fileURL: URL = {
         let docDir = try! FileManager.default.url(for: .documentDirectory,
@@ -30,7 +29,7 @@ final class FavouritesManager {
         return docDir.appendingPathComponent("Favourites.plist")
     }()
     
-    private init() {
+    init() {
         try? favouritesSet = loadFavourites()
     }
 }

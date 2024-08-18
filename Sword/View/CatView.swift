@@ -10,7 +10,7 @@ import SwiftUI
 final class CatViewModel: ObservableObject {
     let favouritesManager: FavouritesManagerProtocol
     
-    init(persistenceManager: FavouritesManagerProtocol = FavouritesManager.shared) {
+    init(persistenceManager: FavouritesManagerProtocol = FavouritesManager()) {
         self.favouritesManager = persistenceManager
     }
     
@@ -50,18 +50,8 @@ struct CatView: View {
                     }
                 }
                 HStack {
-                    Text(cat.name)
-                    Button(action: {
-                        if viewModel.isFavourite(id: cat.id) {
-                            isFavourite = false
-                            viewModel.removeFromFavourites(id: cat.id)
-                        } else {
-                            isFavourite = true
-                            viewModel.saveToFavourites(id: cat.id)
-                        }
-                    }) {
-                        Image(systemName: self.isFavourite == true ? "star.fill" : "star")
-                    }
+                    Text(cat.breedName)
+                    FavouriteView(cat: cat)
                 }
             }
         }

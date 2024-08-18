@@ -15,7 +15,7 @@ final class ViewModel: ObservableObject {
     
     var filteredCatsArray: [Cat] {
         guard !searchTerm.isEmpty else { return catsArray }
-        return catsArray.filter{$0.name.localizedCaseInsensitiveContains(searchTerm)}
+        return catsArray.filter{$0.breedName.localizedCaseInsensitiveContains(searchTerm)}
     }
     
     func isLastCat(id: String) -> Bool {
@@ -44,19 +44,19 @@ struct ContentView: View {
                 ScrollView{
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(viewModel.filteredCatsArray, id: \.id) { cat in
-                            CatView(cat: cat)
-                                .onAppear {
-                                    if viewModel.isLastCat(id: cat.id) {
-                                        print("LAST CAT")
-                                        Task {
-                                            await viewModel.fetchCats()
+                            NavigationLink(destination: DetailView(cat: cat)) {
+                                CatView(cat: cat)
+                                    .onAppear {
+                                        if viewModel.isLastCat(id: cat.id) {
+                                            Task {
+                                                await viewModel.fetchCats()
+                                            }
                                         }
                                     }
-                                }
+                            }
                         }
                     }
                     .searchable(text: $viewModel.searchTerm, prompt: "Search Breeds")
-                    
                 } .padding()
             }
             .padding()
