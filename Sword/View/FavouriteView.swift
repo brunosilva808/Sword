@@ -15,37 +15,26 @@ final class FavouriteViewModel: ObservableObject {
         self.favouritesManager = persistenceManager
     }
     
-    func saveToFavourites(id: String) -> Bool {
+    func isFavourite(id: String) {
         do {
-            try favouritesManager.saveFavourite(id: id)
-            return true
+            isFavourite = try favouritesManager.isFavourite(id: id)
         } catch {
-            return false
+            print(error.localizedDescription)
         }
     }
     
-    func removeFromFavourites(id: String) -> Bool {
+    func toogleFavourite(id: String) {
         do {
-        try favouritesManager.removeFavourite(id: id)
-            return true
+            if try favouritesManager.isFavourite(id: id) {
+                try favouritesManager.removeFavourite(id: id)
+                isFavourite = false
+            } else {
+                try favouritesManager.saveFavourite(id: id)
+                isFavourite = true
+            }
         } catch {
-            return false
+            print(error.localizedDescription)
         }
-    }
-    
-    func isFavourite(id: String) -> Bool {
-        do {
-            let result = try favouritesManager.isFavourite(id: id)
-            return result
-        } catch {
-            return false
-        }
-    }
-    
-    func checkIfItsFavourite(id: String) {
-        print(isFavourite)
-        isFavourite = isFavourite(id: id)
-        print(isFavourite)
     }
 }
 
@@ -56,18 +45,13 @@ struct FavouriteView: View {
     var body: some View {
         HStack {
             Button(action: {
-                if viewModel.isFavourite(id: cat.id) {
-                    viewModel.isFavourite = !viewModel.removeFromFavourites(id: cat.id)
-                } else {
-                    viewModel.isFavourite = viewModel.saveToFavourites(id: cat.id)
-                }
+                viewModel.toogleFavourite(id: cat.id)
             }) {
                 Image(systemName: viewModel.isFavourite == true ? "star.fill" : "star")
             }
         }
         .onAppear {
-            viewModel.checkIfItsFavourite(id: cat.id)
-            print(cat.breedName)
+            viewModel.isFavourite(id: cat.id)
         }
     }
 }
