@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "628D7484-9DA2-4973-AD19-7E7C77BE507D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Sword.xcodeproj",
+      "identifier" : "7E971B332C6F547A00AF458A",
+      "name" : "Sword"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Sword.xcodeproj",
+        "identifier" : "7E971B432C6F547C00AF458A",
+        "name" : "SwordTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Sword.xcodeproj",
+        "identifier" : "7E971B4D2C6F547C00AF458A",
+        "name" : "SwordUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
