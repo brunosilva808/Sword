@@ -74,11 +74,6 @@ extension FavouritesDataManager: FavouritesDataManagerProtocol {
                 favouritesEntity = FavouritesEntity(context: container.viewContext)
                 favouritesEntity.id = id
             }
-//            else if let favourite = results.first {
-//                // Update
-//                favouritesEntity = favourite
-//                favouritesEntity.id = nil
-//            }
         } catch {
             throw CoreDataError.read
         }
@@ -105,7 +100,6 @@ extension FavouritesDataManager: FavouritesDataManagerProtocol {
     }
     
     func isFavourite(id: String) throws -> Bool {
-        
         do {
             favouritesEntities = try fetch(FavouritesEntity.self)
         } catch {
@@ -113,7 +107,6 @@ extension FavouritesDataManager: FavouritesDataManagerProtocol {
         }
             
         for entity in favouritesEntities {
-            print(entity.id)
             if entity.id == id {
                 return true
             }

@@ -33,8 +33,6 @@ final class APIManager: APIManagerProtocol {
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
         request.httpMethod = "GET"
         
-        print("*** API Call started ***")
-        
         do {
             let (data, response) = try await session.data(for: request as URLRequest,
                                                           delegate: nil)
@@ -46,7 +44,6 @@ final class APIManager: APIManagerProtocol {
             }
             
             let result = try decoder.decode(type, from: data)
-            print("API Call ended")
             return result
         } catch  {
             throw APIManagerError.decoding

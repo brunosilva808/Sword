@@ -38,6 +38,6 @@ struct CatView: View {
 
 struct CatView_Previews: PreviewProvider {
     static var previews: some View {
-        CatView(cat: Cat(breeds: [], id: "xpto", url: "https://cdn2.thecatapi.com/images/Hb2N6tYTJ.jpg", width: 100, height: 100))
+        CatView(cat: Cat(breeds: [Breed(id: "1", name: "American", temperament: "Soft", origin: "America", description: "It's a cat")], id: "1", url: "https://cdn2.thecatapi.com/images/Hb2N6tYTJ.jpg"))
     }
 }

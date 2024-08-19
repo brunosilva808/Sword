@@ -94,9 +94,8 @@
 		7E2FF1792C6F56E700443EF3 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				7E2FF1772C6F56E200443EF3 /* APIManager.swift */,
+				7E8942512C725D7D0043532B /* API */,
 				7E89424C2C720EBB0043532B /* FavouritesDataManager.swift */,
-				7E2FF17A2C6F572B00443EF3 /* EndpointEnum.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -115,6 +114,15 @@
 				7E2FF17C2C6F60BE00443EF3 /* APIService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		7E8942512C725D7D0043532B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7E2FF1772C6F56E200443EF3 /* APIManager.swift */,
+				7E2FF17A2C6F572B00443EF3 /* EndpointEnum.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		7E971B2B2C6F547A00AF458A = {
