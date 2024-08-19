@@ -12,11 +12,13 @@ final class FavouritesGridViewModel: ObservableObject {
     private let favouritesManager: FavouritesDataManagerProtocol
     @Published var favouritesArray: [Cat] = []
     
-    init(favouritesManager: FavouritesDataManagerProtocol = FavouritesDataManager.shared) {
+    init(favouritesManager: FavouritesDataManagerProtocol = CoreDataManager()) {
         self.favouritesManager = favouritesManager
     }
     
-    func fetchCats() {
+    func fetchFavourites() {
+        var favouristeTmpArray: [Cat] = []
+        
         do {
             let entities = try favouritesManager.fetchFavourites()
             entities.forEach { favouriteEntity in
@@ -47,11 +49,13 @@ final class FavouritesGridViewModel: ObservableObject {
                 }
                 
                 favourite.breeds = array
-                favouritesArray.append(favourite)
+                favouristeTmpArray.append(favourite)
             }
         } catch {
             print(error.localizedDescription)
         }
+        
+        favouritesArray = favouristeTmpArray
     }
 }
 
@@ -72,7 +76,7 @@ struct FavouritesGridView: View {
                     }
                 } .padding()
             .onAppear {
-                viewModel.fetchCats()
+                viewModel.fetchFavourites()
             }
         }
     }

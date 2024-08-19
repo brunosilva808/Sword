@@ -14,25 +14,19 @@ protocol FavouritesDataManagerProtocol {
     func fetchFavourites() throws -> [FavouriteEntity]
 }
 
-final class FavouritesDataManager {
+final class CoreDataManager {
     
     enum CoreDataError: Error {
         case save
         case read
     }
     
-    static let shared = FavouritesDataManager()
     private var favouritesSet = Set<String>()
-    private let container: NSPersistentContainer
+    private var persistenceContainer: NSPersistentContainer
     private var favouritesEntities: [FavouriteEntity] = []
     
-    private init() {
-        container = NSPersistentContainer(name: "DataModel")
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                print("ERROR LOADING CORE DATA. \(error)")
-            }
-        }
+    init(persistenceContainer: NSPersistentContainer = CoreDataProvider.shared.persistenceContainer) {
+        self.persistenceContainer = persistenceContainer
     }
     
     // MARK: - Generic
@@ -44,7 +38,7 @@ final class FavouritesDataManager {
         }
         
         do {
-            let entities = try container.viewContext.fetch(request)
+            let entities = try persistenceContainer.viewContext.fetch(request)
             return entities as! [T]
         } catch  {
             return []
@@ -53,8 +47,8 @@ final class FavouritesDataManager {
     
     private func save() throws {
         do {
-            if container.viewContext.hasChanges {
-                try container.viewContext.save()
+            if persistenceContainer.viewContext.hasChanges {
+                try persistenceContainer.viewContext.save()
             }
         } catch {
             throw CoreDataError.save
@@ -62,18 +56,18 @@ final class FavouritesDataManager {
     }
 }
 
-extension FavouritesDataManager: FavouritesDataManagerProtocol {
+extension CoreDataManager: FavouritesDataManagerProtocol {
   
     func saveFavourite(cat: Cat) throws {
         if let breed = cat.breeds.first {
-            let breedEntity = BreedEntity(context: container.viewContext)
+            let breedEntity = BreedEntity(context: persistenceContainer.viewContext)
             breedEntity.id = breed.id
             breedEntity.name = breed.name
             breedEntity.origin = breed.origin
             breedEntity.descriptionValue = breed.description
             breedEntity.temperament = breed.temperament
             
-            let favouriteEntity = FavouriteEntity(context: container.viewContext)
+            let favouriteEntity = FavouriteEntity(context: persistenceContainer.viewContext)
             favouriteEntity.id = cat.id
             favouriteEntity.url = cat.url
             
@@ -90,7 +84,7 @@ extension FavouritesDataManager: FavouritesDataManagerProtocol {
     func removeFavourite(id: String) throws {
         for entity in favouritesEntities {
             if entity.id == id {
-                container.viewContext.delete(entity)
+                persistenceContainer.viewContext.delete(entity)
             }
         }
         

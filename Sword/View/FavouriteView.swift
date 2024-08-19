@@ -11,7 +11,7 @@ final class FavouriteViewModel: ObservableObject {
     private let favouritesManager: FavouritesDataManagerProtocol
     @Published var isFavourite = false
     
-    init(persistenceManager: FavouritesDataManagerProtocol = FavouritesDataManager.shared) {
+    init(persistenceManager: FavouritesDataManagerProtocol = CoreDataManager()) {
         self.favouritesManager = persistenceManager
     }
     
