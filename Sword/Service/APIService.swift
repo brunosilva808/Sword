@@ -15,9 +15,9 @@ protocol ImageAPIServiceProtocol {
 
 final class APIService {
     
-    private let apiManager: APIManagerProtocol
+    private let apiManager: APIManager
     
-    init(apiManager: APIManagerProtocol = APIManager()) {
+    init(apiManager: APIManager = APIManager()) {
         self.apiManager = apiManager
     }
 }

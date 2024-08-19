@@ -9,22 +9,24 @@ import Foundation
 
 
 protocol APIManagerProtocol {
-    func downloadAsyncAwait<T: Codable>(_ endpointEnum: EndpointEnum, type: T.Type) async throws -> T?
+    func data(for request: URLRequest, delegate: (URLSessionTaskDelegate)?) async throws -> (Data, URLResponse)
 }
+
+extension URLSession: APIManagerProtocol {}
 
 enum APIManagerError: Error {
     case httpStatus
     case decoding
 }
 
-final class APIManager: APIManagerProtocol {
+final class APIManager {
     
     private var apiKey = "live_B9KDr9FSstkoz46NLyxZ1FoFhHKhUsXUxFTBZR2ZiO3lbZpoRjFxz6WEOLBERjLG"
 
-    private let session: URLSession
+    private let session: APIManagerProtocol
     private let decoder = JSONDecoder()
 
-    init(session: URLSession = URLSession.shared) {
+    init(session: APIManagerProtocol = URLSession.shared) {
         self.session = session
     }
     
@@ -38,8 +40,6 @@ final class APIManager: APIManagerProtocol {
                                                           delegate: nil)
             guard let response = response as? HTTPURLResponse,
                   response.statusCode >= 200 && response.statusCode < 300 else {
-
-                print("*** APIManagerError.httpStatus ***")
                 throw APIManagerError.httpStatus
             }
             
