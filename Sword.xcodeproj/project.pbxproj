@@ -11,6 +11,12 @@
 		7E2FF17B2C6F572B00443EF3 /* EndpointEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2FF17A2C6F572B00443EF3 /* EndpointEnum.swift */; };
 		7E2FF17D2C6F60BE00443EF3 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2FF17C2C6F60BE00443EF3 /* APIService.swift */; };
 		7E2FF17F2C6F622D00443EF3 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2FF17E2C6F622D00443EF3 /* Cat.swift */; };
+		7E491AA52C7369F300D3B11D /* BreedEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E491AA12C7369F300D3B11D /* BreedEntity+CoreDataClass.swift */; };
+		7E491AA62C7369F300D3B11D /* BreedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E491AA22C7369F300D3B11D /* BreedEntity+CoreDataProperties.swift */; };
+		7E491AA72C7369F300D3B11D /* FavouriteEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E491AA32C7369F300D3B11D /* FavouriteEntity+CoreDataClass.swift */; };
+		7E491AA82C7369F300D3B11D /* FavouriteEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E491AA42C7369F300D3B11D /* FavouriteEntity+CoreDataProperties.swift */; };
+		7E491AAA2C737E7D00D3B11D /* FavouritesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E491AA92C737E7D00D3B11D /* FavouritesGridView.swift */; };
+		7E491AAC2C73860F00D3B11D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E491AAB2C73860F00D3B11D /* MainView.swift */; };
 		7E7BCED22C6FA3C500729C04 /* CatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7BCED12C6FA3C500729C04 /* CatView.swift */; };
 		7E8942472C7206C50043532B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8942462C7206C50043532B /* DetailView.swift */; };
 		7E8942492C720BE50043532B /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8942482C720BE50043532B /* DescriptionView.swift */; };
@@ -48,6 +54,12 @@
 		7E2FF17A2C6F572B00443EF3 /* EndpointEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointEnum.swift; sourceTree = "<group>"; };
 		7E2FF17C2C6F60BE00443EF3 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		7E2FF17E2C6F622D00443EF3 /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
+		7E491AA12C7369F300D3B11D /* BreedEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreedEntity+CoreDataClass.swift"; path = "Sword/NSManagedObjects/BreedEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7E491AA22C7369F300D3B11D /* BreedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreedEntity+CoreDataProperties.swift"; path = "Sword/NSManagedObjects/BreedEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7E491AA32C7369F300D3B11D /* FavouriteEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavouriteEntity+CoreDataClass.swift"; path = "Sword/NSManagedObjects/FavouriteEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7E491AA42C7369F300D3B11D /* FavouriteEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavouriteEntity+CoreDataProperties.swift"; path = "Sword/NSManagedObjects/FavouriteEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7E491AA92C737E7D00D3B11D /* FavouritesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesGridView.swift; sourceTree = "<group>"; };
+		7E491AAB2C73860F00D3B11D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7E7BCED12C6FA3C500729C04 /* CatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatView.swift; sourceTree = "<group>"; };
 		7E8942462C7206C50043532B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		7E8942482C720BE50043532B /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
@@ -128,6 +140,10 @@
 		7E971B2B2C6F547A00AF458A = {
 			isa = PBXGroup;
 			children = (
+				7E491AA12C7369F300D3B11D /* BreedEntity+CoreDataClass.swift */,
+				7E491AA22C7369F300D3B11D /* BreedEntity+CoreDataProperties.swift */,
+				7E491AA32C7369F300D3B11D /* FavouriteEntity+CoreDataClass.swift */,
+				7E491AA42C7369F300D3B11D /* FavouriteEntity+CoreDataProperties.swift */,
 				7E971B362C6F547A00AF458A /* Sword */,
 				7E971B472C6F547C00AF458A /* SwordTests */,
 				7E971B512C6F547C00AF458A /* SwordUITests */,
@@ -189,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				7E971B392C6F547A00AF458A /* ContentView.swift */,
+				7E491AAB2C73860F00D3B11D /* MainView.swift */,
+				7E491AA92C737E7D00D3B11D /* FavouritesGridView.swift */,
 				7E8942462C7206C50043532B /* DetailView.swift */,
 				7E7BCED12C6FA3C500729C04 /* CatView.swift */,
 				7E8942482C720BE50043532B /* DescriptionView.swift */,
@@ -327,9 +345,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E491AA82C7369F300D3B11D /* FavouriteEntity+CoreDataProperties.swift in Sources */,
+				7E491AAC2C73860F00D3B11D /* MainView.swift in Sources */,
 				7E2FF1782C6F56E200443EF3 /* APIManager.swift in Sources */,
 				7E8942472C7206C50043532B /* DetailView.swift in Sources */,
 				7E2FF17D2C6F60BE00443EF3 /* APIService.swift in Sources */,
+				7E491AAA2C737E7D00D3B11D /* FavouritesGridView.swift in Sources */,
 				7E7BCED22C6FA3C500729C04 /* CatView.swift in Sources */,
 				7E2FF17F2C6F622D00443EF3 /* Cat.swift in Sources */,
 				7E971B3A2C6F547A00AF458A /* ContentView.swift in Sources */,
@@ -339,6 +360,9 @@
 				7E8942502C720EDC0043532B /* DataModel.xcdatamodeld in Sources */,
 				7E8942492C720BE50043532B /* DescriptionView.swift in Sources */,
 				7E89424D2C720EBB0043532B /* FavouritesDataManager.swift in Sources */,
+				7E491AA72C7369F300D3B11D /* FavouriteEntity+CoreDataClass.swift in Sources */,
+				7E491AA52C7369F300D3B11D /* BreedEntity+CoreDataClass.swift in Sources */,
+				7E491AA62C7369F300D3B11D /* BreedEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

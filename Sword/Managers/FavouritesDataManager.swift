@@ -8,9 +8,10 @@
 import CoreData
 
 protocol FavouritesDataManagerProtocol {
-    func saveFavourite(id: String) throws
+    func saveFavourite(cat: Cat) throws
     func removeFavourite(id: String) throws
     func isFavourite(id: String) throws -> Bool
+    func fetchFavourites() throws -> [FavouriteEntity]
 }
 
 final class FavouritesDataManager {
@@ -23,7 +24,7 @@ final class FavouritesDataManager {
     static let shared = FavouritesDataManager()
     private var favouritesSet = Set<String>()
     private let container: NSPersistentContainer
-    private (set) var favouritesEntities: [FavouritesEntity] = []
+    private var favouritesEntities: [FavouriteEntity] = []
     
     private init() {
         container = NSPersistentContainer(name: "DataModel")
@@ -62,26 +63,27 @@ final class FavouritesDataManager {
 }
 
 extension FavouritesDataManager: FavouritesDataManagerProtocol {
-    
-    func saveFavourite(id: String) throws {
-        do {
-            var favouritesEntity: FavouritesEntity
+  
+    func saveFavourite(cat: Cat) throws {
+        if let breed = cat.breeds.first {
+            let breedEntity = BreedEntity(context: container.viewContext)
+            breedEntity.id = breed.id
+            breedEntity.name = breed.name
+            breedEntity.origin = breed.origin
+            breedEntity.descriptionValue = breed.description
+            breedEntity.temperament = breed.temperament
             
-            let results = try fetch(FavouritesEntity.self, id: id)
+            let favouriteEntity = FavouriteEntity(context: container.viewContext)
+            favouriteEntity.id = cat.id
+            favouriteEntity.url = cat.url
             
-            if results.count == 0 {
-                // New Entity
-                favouritesEntity = FavouritesEntity(context: container.viewContext)
-                favouritesEntity.id = id
+            favouriteEntity.addToBreedsRelationship(breedEntity)
+            
+            do {
+                _ = try save()
+            } catch {
+                throw CoreDataError.save
             }
-        } catch {
-            throw CoreDataError.read
-        }
-        
-        do {
-            _ = try save()
-        } catch {
-            throw CoreDataError.save
         }
     }
     
@@ -101,7 +103,7 @@ extension FavouritesDataManager: FavouritesDataManagerProtocol {
     
     func isFavourite(id: String) throws -> Bool {
         do {
-            favouritesEntities = try fetch(FavouritesEntity.self)
+            favouritesEntities = try fetch(FavouriteEntity.self)
         } catch {
             throw CoreDataError.read
         }
@@ -113,5 +115,14 @@ extension FavouritesDataManager: FavouritesDataManagerProtocol {
         }
         
         return false
+    }
+    
+    func fetchFavourites() throws -> [FavouriteEntity] {
+        do {
+            favouritesEntities = try fetch(FavouriteEntity.self)
+            return favouritesEntities
+        } catch {
+            throw CoreDataError.read
+        }
     }
 }

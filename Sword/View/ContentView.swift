@@ -40,7 +40,6 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack{
-            VStack {
                 ScrollView{
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(viewModel.filteredCatsArray, id: \.id) { cat in
@@ -58,8 +57,6 @@ struct ContentView: View {
                     }
                     .searchable(text: $viewModel.searchTerm, prompt: "Search Breeds")
                 } .padding()
-            }
-            .padding()
             .task {
                 await viewModel.fetchCats()
             }

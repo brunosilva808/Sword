@@ -8,7 +8,7 @@
 import Foundation
 
 struct Cat: Codable {
-    let breeds: [Breed]
+    var breeds: [Breed]
     let id: String
     let url: String
 }

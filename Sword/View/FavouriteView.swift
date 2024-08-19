@@ -23,13 +23,13 @@ final class FavouriteViewModel: ObservableObject {
         }
     }
     
-    func toogleFavourite(id: String) {
+    func toogleFavourite(cat: Cat) {
         do {
-            if try favouritesManager.isFavourite(id: id) {
-                try favouritesManager.removeFavourite(id: id)
+            if try favouritesManager.isFavourite(id: cat.id) {
+                try favouritesManager.removeFavourite(id: cat.id)
                 isFavourite = false
             } else {
-                try favouritesManager.saveFavourite(id: id)
+                try favouritesManager.saveFavourite(cat: cat)
                 isFavourite = true
             }
         } catch {
@@ -45,7 +45,7 @@ struct FavouriteView: View {
     var body: some View {
         HStack {
             Button(action: {
-                viewModel.toogleFavourite(id: cat.id)
+                viewModel.toogleFavourite(cat: cat)
             }) {
                 Image(systemName: viewModel.isFavourite == true ? "star.fill" : "star")
             }

@@ -11,7 +11,7 @@ import SwiftUI
 struct SwordApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }

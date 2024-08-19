@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="FavouritesEntity" representedClassName="FavouritesEntity" syncable="YES" codeGenerationType="class">
+    <entity name="BreedEntity" representedClassName=".BreedEntity" syncable="YES">
+        <attribute name="descriptionValue" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="origin" optional="YES" attributeType="String"/>
+        <attribute name="temperament" optional="YES" attributeType="String"/>
+        <relationship name="favouriteRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FavouriteEntity" inverseName="breedsRelationship" inverseEntity="FavouriteEntity"/>
+    </entity>
+    <entity name="FavouriteEntity" representedClassName=".FavouriteEntity" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="breedsRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BreedEntity" inverseName="favouriteRelationship" inverseEntity="BreedEntity"/>
     </entity>
 </model>
