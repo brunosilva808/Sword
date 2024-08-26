@@ -14,7 +14,7 @@ protocol FavouritesDataManagerProtocol {
     func fetchFavourites() throws -> [FavouriteEntity]
 }
 
-final class CoreDataManager {
+final class CoreDataManager: ObservableObject {
     
     enum CoreDataError: Error {
         case save

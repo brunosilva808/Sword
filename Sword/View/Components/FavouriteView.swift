@@ -8,16 +8,16 @@
 import SwiftUI
 
 final class FavouriteViewModel: ObservableObject {
-    private let favouritesManager: FavouritesDataManagerProtocol
+    var coreDataManager: CoreDataManager?
     @Published var isFavourite = false
     
-    init(persistenceManager: FavouritesDataManagerProtocol = CoreDataManager()) {
-        self.favouritesManager = persistenceManager
+    func setup(coreDataManager: CoreDataManager) {
+        self.coreDataManager = coreDataManager
     }
     
     func isFavourite(id: String) {
         do {
-            isFavourite = try favouritesManager.isFavourite(id: id)
+            isFavourite = try coreDataManager?.isFavourite(id: id) ?? false
         } catch {
             print(error.localizedDescription)
         }
@@ -25,11 +25,13 @@ final class FavouriteViewModel: ObservableObject {
     
     func toogleFavourite(cat: Cat) {
         do {
-            if try favouritesManager.isFavourite(id: cat.id) {
-                try favouritesManager.removeFavourite(id: cat.id)
+            guard let coreDataManager = coreDataManager  else { return }
+            
+            if try coreDataManager.isFavourite(id: cat.id) {
+                try coreDataManager.removeFavourite(id: cat.id)
                 isFavourite = false
             } else {
-                try favouritesManager.saveFavourite(cat: cat)
+                try coreDataManager.saveFavourite(cat: cat)
                 isFavourite = true
             }
         } catch {
@@ -40,6 +42,7 @@ final class FavouriteViewModel: ObservableObject {
 
 struct FavouriteView: View {
     @StateObject private var viewModel = FavouriteViewModel()
+    @EnvironmentObject var coreDataManager: CoreDataManager
     var cat: Cat
     
     var body: some View {
@@ -51,6 +54,7 @@ struct FavouriteView: View {
             }
         }
         .onAppear {
+            viewModel.setup(coreDataManager: coreDataManager)
             viewModel.isFavourite(id: cat.id)
         }
     }
@@ -58,6 +62,7 @@ struct FavouriteView: View {
 
 struct FavouriteView_Previews: PreviewProvider {
     static var previews: some View {
-        FavouriteView(cat: Cat(breeds: [Breed(id: "1", name: "American", temperament: "Soft", origin: "America", description: "It's a cat")], id: "1", url: "https://cdn2.thecatapi.com/images/Hb2N6tYTJ.jpg"))
+        FavouriteView(
+            cat: Cat(breeds: [Breed(id: "1", name: "American", temperament: "Soft", origin: "America", description: "It's a cat")], id: "1", url: "https://cdn2.thecatapi.com/images/Hb2N6tYTJ.jpg"))
     }
 }

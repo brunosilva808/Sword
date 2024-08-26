@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailView: View {
 
+    @EnvironmentObject var coreDataManager: CoreDataManager
     var cat: Cat
     
     var body: some View {
@@ -19,6 +20,7 @@ struct DetailView: View {
                         .font(.title)
                     Spacer()
                     FavouriteView(cat: cat)
+                        .environmentObject(coreDataManager)
                 }
                 .padding(20)
                 

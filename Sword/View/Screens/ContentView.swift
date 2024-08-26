@@ -36,6 +36,7 @@ final class ViewModel: ObservableObject {
 struct ContentView: View {
     
     @StateObject var viewModel = ViewModel()
+    @EnvironmentObject var coreDataManager: CoreDataManager
     private let columns = [ GridItem(.adaptive(minimum: 100)) ]
     
     var body: some View {
@@ -43,8 +44,9 @@ struct ContentView: View {
                 ScrollView{
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(viewModel.filteredCatsArray, id: \.id) { cat in
-                            NavigationLink(destination: DetailView(cat: cat)) {
+                            NavigationLink(destination: DetailView(cat: cat).environmentObject(coreDataManager)) {
                                 CatView(cat: cat)
+                                    .environmentObject(coreDataManager)
                                     .onAppear {
                                         if viewModel.isLastCat(id: cat.id) {
                                             Task {

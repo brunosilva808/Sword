@@ -9,7 +9,7 @@ import SwiftUI
 
 final class FavouritesGridViewModel: ObservableObject {
     
-    private let favouritesManager: FavouritesDataManagerProtocol
+    var favouritesManager: FavouritesDataManagerProtocol
     @Published var favouritesArray: [Cat] = []
     
     init(favouritesManager: FavouritesDataManagerProtocol = CoreDataManager()) {
@@ -62,6 +62,7 @@ final class FavouritesGridViewModel: ObservableObject {
 struct FavouritesGridView: View {
     
     @StateObject var viewModel = FavouritesGridViewModel()
+    @EnvironmentObject var coreDataManager: CoreDataManager
     private let columns = [ GridItem(.adaptive(minimum: 100)) ]
     
     var body: some View {
@@ -69,8 +70,9 @@ struct FavouritesGridView: View {
                 ScrollView{
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(viewModel.favouritesArray, id: \.id) { cat in
-                            NavigationLink(destination: DetailView(cat: cat)) {
+                            NavigationLink(destination: DetailView(cat: cat).environmentObject(coreDataManager)) {
                                 CatView(cat: cat)
+                                    .environmentObject(coreDataManager)
                             }
                         }
                     }

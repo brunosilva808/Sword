@@ -248,16 +248,32 @@
 			path = SwordUITests;
 			sourceTree = "<group>";
 		};
-		7EC9F5342C70AD7200DF5D7B /* View */ = {
+		7EA3897E2C7CD826009369C0 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				7E971B392C6F547A00AF458A /* ContentView.swift */,
 				7E491AAB2C73860F00D3B11D /* MainView.swift */,
 				7E491AA92C737E7D00D3B11D /* FavouritesGridView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		7EA3897F2C7CD831009369C0 /* Components */ = {
+			isa = PBXGroup;
+			children = (
 				7E8942462C7206C50043532B /* DetailView.swift */,
 				7E7BCED12C6FA3C500729C04 /* CatView.swift */,
 				7E8942482C720BE50043532B /* DescriptionView.swift */,
 				7E89424A2C720C410043532B /* FavouriteView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7EC9F5342C70AD7200DF5D7B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7EA3897E2C7CD826009369C0 /* Screens */,
+				7EA3897F2C7CD831009369C0 /* Components */,
 			);
 			path = View;
 			sourceTree = "<group>";

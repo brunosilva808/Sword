@@ -10,6 +10,7 @@ import SwiftUI
 struct CatView: View {
     
     var cat: Cat
+    @EnvironmentObject var coreDataManager: CoreDataManager
     @State var isFavourite = false
     
     var body: some View {
@@ -31,6 +32,7 @@ struct CatView: View {
                 HStack {
                     Text(cat.breedName)
                     FavouriteView(cat: cat)
+                        .environmentObject(coreDataManager)
                 }
             }
         }

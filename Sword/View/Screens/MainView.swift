@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @StateObject var coreDataManager = CoreDataManager()
+    
     var body: some View {
         TabView {
             ContentView()
+                .environmentObject(coreDataManager)
                 .tabItem {
                     Label("Menu 1", systemImage: "menubar.rectangle")
                 }
             
             FavouritesGridView()
+                .environmentObject(coreDataManager)
                 .tabItem {
                     Label("Menu 2", systemImage: "menubar.rectangle")
                 }
