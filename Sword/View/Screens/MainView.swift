@@ -13,11 +13,27 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            ContentView()
-                .environmentObject(coreDataManager)
+            
+            CatGridView()
                 .tabItem {
-                    Label("Menu 1", systemImage: "menubar.rectangle")
+                    Label("Cat Grid", systemImage: "menubar.rectangle")
                 }
+            
+//            InfiniteScrollView()
+//                .tabItem {
+//                    Label("Infinite", systemImage: "menubar.rectangle")
+//                }
+//
+//            ImageGridView()
+//                .tabItem{
+//                    Label("New Logic", systemImage: "menubar.rectangle")
+//                }
+//
+//            CatsGridView()
+//                .environmentObject(coreDataManager)
+//                .tabItem {
+//                    Label("Menu 1", systemImage: "menubar.rectangle")
+//                }
             
             FavouritesGridView()
                 .environmentObject(coreDataManager)

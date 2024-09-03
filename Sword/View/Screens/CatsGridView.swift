@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-final class ViewModel: ObservableObject {
+final class CatsGridViewModel: ObservableObject {
     private let apiService: APIService
-    private var page = 0
+    private (set) var page = 0
     @Published var catsArray: [Cat] = []
     @Published var searchTerm = ""
+    
+    var isLoading = false
     
     var filteredCatsArray: [Cat] {
         guard !searchTerm.isEmpty else { return catsArray }
@@ -28,14 +30,19 @@ final class ViewModel: ObservableObject {
     
     @MainActor
     func fetchCats() async {
-        catsArray.append(contentsOf: await apiService.fetchImages(.thumb, page: page, limit: 25))
-        page += 1
+        if !isLoading {
+            isLoading = true
+            let array = await apiService.fetchImages(.thumb, page: page, limit: 25)
+            catsArray.append(contentsOf: array)
+            page += 1
+            isLoading = false
+        }
     }
 }
 
-struct ContentView: View {
+struct CatsGridView: View {
     
-    @StateObject var viewModel = ViewModel()
+    @StateObject var viewModel = CatsGridViewModel()
     @EnvironmentObject var coreDataManager: CoreDataManager
     private let columns = [ GridItem(.adaptive(minimum: 100)) ]
     
@@ -68,6 +75,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        CatsGridView()
     }
 }
