@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct CatRowView: View {
     
@@ -14,9 +13,6 @@ struct CatRowView: View {
     
     var body: some View {
         HStack {
-//            KFImage(URL(string: cat.url)!)
-//                .resizable()
-//                .frame(width: 100, height: 100)
             AsyncImage(url: URL(string: cat.url)!) { image in
                 image
                     .resizable()

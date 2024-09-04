@@ -21,7 +21,7 @@ final class CatsGridViewModel: ObservableObject {
     }
     
     func isLastCat(id: String) -> Bool {
-        return catsArray.last?.id == id ? true : false
+        return catsArray.last?.id == id
     }
     
     init(apiService: APIService = APIService()) {
@@ -57,6 +57,7 @@ struct CatsGridView: View {
                                     .onAppear {
                                         if viewModel.isLastCat(id: cat.id) {
                                             Task {
+                                                print("Call from CatView")
                                                 await viewModel.fetchCats()
                                             }
                                         }
@@ -67,6 +68,7 @@ struct CatsGridView: View {
                     .searchable(text: $viewModel.searchTerm, prompt: "Search Breeds")
                 } .padding()
             .task {
+                print("Call from GridsCatView")
                 await viewModel.fetchCats()
             }
         }

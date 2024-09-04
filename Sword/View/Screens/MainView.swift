@@ -14,10 +14,10 @@ struct MainView: View {
     var body: some View {
         TabView {
             
-            CatGridView()
-                .tabItem {
-                    Label("Cat Grid", systemImage: "menubar.rectangle")
-                }
+//            CatGridView()
+//                .tabItem {
+//                    Label("Cat Grid", systemImage: "menubar.rectangle")
+//                }
             
 //            InfiniteScrollView()
 //                .tabItem {
@@ -28,12 +28,12 @@ struct MainView: View {
 //                .tabItem{
 //                    Label("New Logic", systemImage: "menubar.rectangle")
 //                }
-//
-//            CatsGridView()
-//                .environmentObject(coreDataManager)
-//                .tabItem {
-//                    Label("Menu 1", systemImage: "menubar.rectangle")
-//                }
+
+            CatsGridView()
+                .environmentObject(coreDataManager)
+                .tabItem {
+                    Label("Menu 1", systemImage: "menubar.rectangle")
+                }
             
             FavouritesGridView()
                 .environmentObject(coreDataManager)

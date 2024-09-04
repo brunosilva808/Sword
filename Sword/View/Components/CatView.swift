@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Nuke
 
 final class CatViewModel: ObservableObject {
     
@@ -33,6 +34,14 @@ final class CatViewModel: ObservableObject {
             image = UIImage(systemName: "photo")!
         }
     }
+    
+    func loadImageFromNuke(_ urlString: String) async throws {
+        let imageTask = ImagePipeline.shared.imageTask(with: URL(string: urlString)!)
+        for await progress in imageTask.progress {
+            // Update progress
+        }
+        image = try await imageTask.image
+    }
 }
 
 struct CatView: View {
@@ -40,9 +49,9 @@ struct CatView: View {
     @StateObject var viewModel = CatViewModel()
     @EnvironmentObject var coreDataManager: CoreDataManager
     var cat: Cat
-    
-    var body: some View {
-            VStack {
+  
+//    var body: some View {
+//            VStack {
 //                AsyncImage(url: URL(string: cat.url)) { phase in
 //                    switch phase {
 //                    case .empty:
@@ -57,6 +66,11 @@ struct CatView: View {
 //                        EmptyView()
 //                    }
 //                }
+//            }
+//        }
+    
+    var body: some View {
+            VStack {
                 Image(uiImage: viewModel.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -69,7 +83,7 @@ struct CatView: View {
             }.onAppear {
                 viewModel.setup(coreDataManager)
                 Task {
-                    await viewModel.loadImage(cat.url)
+                    try? await viewModel.loadImageFromNuke(cat.url)
                 }
             }
         }

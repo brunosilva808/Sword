@@ -27,6 +27,8 @@
 		7E491AB32C739AF300D3B11D /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E491AB22C739AF300D3B11D /* DataController.swift */; };
 		7E491AB62C73BF7700D3B11D /* CoreDataMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E491AB52C73BF7700D3B11D /* CoreDataMock.swift */; };
 		7E491AB92C73C07600D3B11D /* CoreDataUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E491AB82C73C07600D3B11D /* CoreDataUnitTests.swift */; };
+		7E5E934C2C889A6700EEE1AC /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5E934B2C889A6700EEE1AC /* Nuke */; };
+		7E5E934E2C889A6700EEE1AC /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5E934D2C889A6700EEE1AC /* NukeUI */; };
 		7E7BCED22C6FA3C500729C04 /* CatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7BCED12C6FA3C500729C04 /* CatView.swift */; };
 		7E8942472C7206C50043532B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8942462C7206C50043532B /* DetailView.swift */; };
 		7E8942492C720BE50043532B /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8942482C720BE50043532B /* DescriptionView.swift */; };
@@ -107,7 +109,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E5E934E2C889A6700EEE1AC /* NukeUI in Frameworks */,
 				7EB41ED92C80C7DB00F9FDCB /* Kingfisher in Frameworks */,
+				7E5E934C2C889A6700EEE1AC /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +339,8 @@
 			name = Sword;
 			packageProductDependencies = (
 				7EB41ED82C80C7DB00F9FDCB /* Kingfisher */,
+				7E5E934B2C889A6700EEE1AC /* Nuke */,
+				7E5E934D2C889A6700EEE1AC /* NukeUI */,
 			);
 			productName = Sword;
 			productReference = 7E971B342C6F547A00AF458A /* Sword.app */;
@@ -410,6 +416,7 @@
 			mainGroup = 7E971B2B2C6F547A00AF458A;
 			packageReferences = (
 				7EB41ED72C80C7DB00F9FDCB /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7E5E934A2C889A6700EEE1AC /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = 7E971B352C6F547A00AF458A /* Products */;
 			projectDirPath = "";
@@ -802,6 +809,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7E5E934A2C889A6700EEE1AC /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
 		7EB41ED72C80C7DB00F9FDCB /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -813,6 +828,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7E5E934B2C889A6700EEE1AC /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E5E934A2C889A6700EEE1AC /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		7E5E934D2C889A6700EEE1AC /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E5E934A2C889A6700EEE1AC /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
 		7EB41ED82C80C7DB00F9FDCB /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7EB41ED72C80C7DB00F9FDCB /* XCRemoteSwiftPackageReference "Kingfisher" */;
