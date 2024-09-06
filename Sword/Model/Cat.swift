@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Cat: Codable, Equatable {
+struct Cat: Codable, Equatable, Identifiable {
     var breeds: [Breed]
     let id: String
     let url: String
